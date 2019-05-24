@@ -1,0 +1,17 @@
+.form-check {
+    display: flex;
+    align-content: left;
+}
+
+.form-check-label {
+    align-items: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #a5a1a1;
+    margin-left: 1em;
+}
+
+.form-check-input {
+    width: 28px;
+    height: 24px;
+}

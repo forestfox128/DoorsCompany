@@ -6,7 +6,10 @@ import Container from 'react-bootstrap/Container'
 import Toolbar from '../Components/Toolbar/Toolbar';
 import Button from '../Components/Button/Button';
 import FormInput from '../Components/FormInput/FormInput';
+import CheckBox from '../Components/Checkbox/Checkbox';
 import {authorizeUser} from '../services/api';
+
+import '../styles/style.css';
 
 class LoginScreen extends React.Component {
 
@@ -15,16 +18,6 @@ class LoginScreen extends React.Component {
         password: '',
         loginError: false,
         validated: false
-    }
-
-    async componentDidMount() {
-        const token = await authorizeUser("xx", "xx");
-        if (token) {
-            console.log(token)
-            this.props.history.push('/home');
-        } else {
-            this.setState({loginError: true})
-        }
     }
 
     handleChangeEmail = event => {
@@ -57,14 +50,14 @@ class LoginScreen extends React.Component {
         return (
             <div>
                 <Toolbar />
-                <Container fluid={true} style={{ marginTop: '15em' }}>
+                <Container fluid={true} style={{ marginTop: '6em' }}>
                     <Row>
                         <Col lg={4} md={4}></Col>
-                        <Col lg={4} md={4}>
+                        <Col lg={4} md={4} style={{padding: '6em'}}>
                             <Form noValidate
                                 validated={validated}
                                 onSubmit={e => this.handleSubmit(e)}>
-                                <Form.Label>Log IN</Form.Label>
+                                <Form.Label className="form-label">Log in</Form.Label>
                                 <Form.Group controlId="formBasicEmail">
                                     <FormInput type={"email"} placeholder={"Enter email"} onChange={this.handleChangeEmail} />
                                 </Form.Group>
@@ -73,8 +66,8 @@ class LoginScreen extends React.Component {
 
                                     <FormInput type={"password"} placeholder={"Password"} onChange={this.handleChangePassword} />
                                 </Form.Group>
-                                <Form.Group controlId="formBasicChecbox">
-                                    <Form.Check type="checkbox" label="Check me out" />
+                                <Form.Group controlId="formBasicChecbox" >
+                                    <CheckBox checkboxLabel={"Keep me logged"}></CheckBox>
                                 </Form.Group>
                                 <Button buttonText={"Zaloguj"} submit={"submit"}></Button>
                             </Form>

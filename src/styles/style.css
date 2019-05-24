@@ -1,0 +1,16 @@
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #848c93;
+}
+
+.form-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    color: #727272;
+    margin-bottom: 2em;
+}
+
+.form-group {
+    margin: 2em 0;
+}
