@@ -1,0 +1,12 @@
+.btn {
+    background-color: #1de278;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+  }
+
+.btn-xxl {
+    font-size: 18px;
+    width: 397px;
+    height: 48px;
+    text-align: center;
+  }

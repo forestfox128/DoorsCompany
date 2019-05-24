@@ -4,7 +4,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import PrivateRoute from './services/PrivateRoute';
 import LoginScreen from './Screens/LoginScreen';
+import HomeScreen from './Screens/HomeScreen';
 import './App.css';
 
 function App() {
@@ -12,7 +14,8 @@ function App() {
     <div className="App">
       <Router>
           <Switch>
-            <Route path="/" component={LoginScreen}/>
+            <Route path="/login" component={LoginScreen}/>
+            <PrivateRoute path='/home' component={HomeScreen} />
         </Switch> 
       </Router> 
     </div>
