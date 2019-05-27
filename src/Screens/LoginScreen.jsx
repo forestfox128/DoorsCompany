@@ -23,7 +23,8 @@ class LoginScreen extends React.Component {
         showError: false,
         errorMessage: '',
         showProgressBar: false,
-        progressState: 0
+        progressState: 0,
+        selectValue: 'polish'
     }
 
     componentWillMount(){
@@ -60,14 +61,19 @@ class LoginScreen extends React.Component {
     handleErrorShow = () => {
         this.setState({ showError: true });
     }
+
+    handleSelectChange = (event) => {
+        console.log(event.target.value)
+        this.setState({selectValue: event.target.value});
+    }
+
     showProgress () {
         this.setState({showProgressBar: true});
         let x = 10
         this.progressInterval = setInterval(
             () => this.setState({progressState: x += 10}),
             100
-          );
-        
+          );   
     }
     tryAuthorize = async e => {
         e.preventDefault();
@@ -78,7 +84,9 @@ class LoginScreen extends React.Component {
             this.setState({showProgressBar: false});
             if (token.status === 200) {
                 if(this.state.checkBox)
-                  localStorage.setItem('isLogged', 'logged');
+                    localStorage.setItem('isLogged', 'logged');
+                else
+                    localStorage.setItem('isLogged', 'logout');
                   this.props.history.push('/home');
             } else {
                 if(token === 401)
@@ -90,7 +98,7 @@ class LoginScreen extends React.Component {
     render() {
         return (
             <div> 
-                <Toolbar />
+                <Toolbar value={this.state.selectValue} onChange={this.handleSelectChange}/>
                 {this.state.showProgressBar ? <Progressbar progressState={this.state.progressState} /> : ''}
                 {this.state.showError ? <ErrorMessage onClick={this.handleErrorDismiss} errorMessage={this.state.errorMessage}></ErrorMessage> : ''}
                 <Container fluid={true} style={{ marginTop: '6em' }}>
@@ -110,7 +118,7 @@ class LoginScreen extends React.Component {
                                     <CheckBox checkboxLabel={"Keep me logged"} checked={this.state.checkBox}
                                     onChange={this.handleChangeCheckbox}></CheckBox>
                                 </Form.Group>
-                                <Button buttonText={"Zaloguj"} onClick={this.tryAuthorize}></Button>
+                                <Button buttonText={"Zaloguj"} onClick={this.tryAuthorize} size={"xxl"}></Button>
                             </Form>
 
                         </Col>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
-
 class PrivateRoute extends React.Component {
 
   state = {
@@ -11,10 +10,12 @@ class PrivateRoute extends React.Component {
   }
 
   async componentWillMount() {
-    const token = await localStorage.getItem('isLogged');
-    if (token) {
-      this.setState({ loggedIn: true });
-      this.setState({ authorized: true });
+    const info = await localStorage.getItem('isLogged');
+    if (info === 'logged') {
+      this.setState({ loggedIn: true, authorized: true });
+    } else if(info === 'logout'){
+      this.setState({ loggedIn: true, authorized: true });
+      localStorage.removeItem('isLogged');
     } else {
       this.setState({ loggedIn: false });
       this.setState({ loginError: true });

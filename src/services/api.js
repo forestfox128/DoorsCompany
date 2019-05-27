@@ -27,6 +27,15 @@ export async function authorizeUser(username, password) {
   }
     const token = await instance.post(`login/`, data);
     console.log(token);
-    return token;
+    return token;  
+}
+
+export async function getOrganizationData() {
   
+    const data = await instance.get(`organization/`, {
+      'Content-Type': 'application/json',
+      'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJvcmdhbml6YXRpb25faWQiOjMsImV4cCI6MTU1NzQwNTUxNywiY3JlYXRlZF9hdCI6IjIwMTktMDQtMjUgMTI6Mzg6MzcgVVRDIn0.KzZpau5szzaBgy_rDOIg1vQxbtr4g1LY1jUn8svHddc'
+    });
+    console.log(data.body);
+    return data.body;  
 }

@@ -1,4 +1,4 @@
-.btn {
+.btn-xxl {
     background-color: #1de278;
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -9,4 +9,16 @@
     width: 100%;
     height: 48px;
     text-align: center;
+  }
+
+  .btn-lg {
+    border: #77779D;
+    background-color: #77779D;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 118px;
+    height: 32px;
+    text-align: center;
+    margin-top: 1.7em;
   }
