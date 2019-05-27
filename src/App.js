@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  HashRouter as Router,
   Route,
   Switch
 } from 'react-router-dom';
+import {HashRouter as Router} from 'react-router-dom';
 import {IntlProvider} from "react-intl";
 import PrivateRoute from './services/PrivateRoute';
 import LoginScreen from './Screens/LoginScreen';
