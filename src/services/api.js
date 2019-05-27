@@ -21,7 +21,6 @@ instance.interceptors.response.use( undefined, (error) => {
 
 
 export async function authorizeUser(username, password) {
-  console.log("IN HIEr")
   const data = {
     "email": "login@applover.pl",
     "password": "password123"

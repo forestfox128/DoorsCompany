@@ -33,11 +33,13 @@ class LoginScreen extends React.Component {
               this.props.history.push('/home');
         });
     }
+    componentWillUnmount() {
+        clearInterval(this.progressInterval);
+      }
 
     validateIsLogged = async () => {
         const token = await localStorage.getItem('isLogged');
         const isLogged = token === 'logged';
-        console.log(isLogged)
         return isLogged;
       }
 
@@ -58,33 +60,38 @@ class LoginScreen extends React.Component {
     handleErrorShow = () => {
         this.setState({ showError: true });
     }
-
+    showProgress () {
+        this.setState({showProgressBar: true});
+        let x = 10
+        this.progressInterval = setInterval(
+            () => this.setState({progressState: x += 10}),
+            100
+          );
+        
+    }
     tryAuthorize = async e => {
         e.preventDefault();
-        const { username, password } = this.state;
+        const { username, password } = this.state; 
+        setTimeout(this.showProgress(), 2000);
         const token = await authorizeUser(username, password);
-        setTimeout(() => {
-            this.setState({showProgressBar: true});
-            console.log("Tiem")
-          }, 2000);
-          this.setState({showProgressBar: false});
-              if (token.status === 200) {
-                  if(this.state.checkBox)
-                    localStorage.setItem('isLogged', 'logged');
+        
+            this.setState({showProgressBar: false});
+            if (token.status === 200) {
+                if(this.state.checkBox)
+                  localStorage.setItem('isLogged', 'logged');
                   this.props.history.push('/home');
-              } else {
-                  if(token === 401)
-                    this.setState({showError: true , errorMessage: 'Invalid username or password'})
-                else this.setState({showError: true , errorMessage: 'A login error occured'})
-              }   
+            } else {
+                if(token === 401)
+                  this.setState({showError: true , errorMessage: 'Invalid username or password'})
+              else this.setState({showError: true , errorMessage: 'A login error occured'})
+            }          
       }
 
     render() {
         return (
-            <div>
-                
+            <div> 
                 <Toolbar />
-                {this.state.showProgressBar ? <Progressbar progressState={40} /> : ''}
+                {this.state.showProgressBar ? <Progressbar progressState={this.state.progressState} /> : ''}
                 {this.state.showError ? <ErrorMessage onClick={this.handleErrorDismiss} errorMessage={this.state.errorMessage}></ErrorMessage> : ''}
                 <Container fluid={true} style={{ marginTop: '6em' }}>
                     <Row>
