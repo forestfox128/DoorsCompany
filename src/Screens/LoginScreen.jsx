@@ -8,6 +8,7 @@ import Button from '../Components/Button/Button';
 import FormInput from '../Components/FormInput/FormInput';
 import CheckBox from '../Components/Checkbox/Checkbox';
 import Progressbar from '../Components/Progressbar/Progressbar';
+import ErrorMessage from '../Components/ErrorMessage/ErrorMessage';
 import {authorizeUser} from '../services/api';
 
 import '../styles/style.css';
@@ -20,6 +21,8 @@ class LoginScreen extends React.Component {
         loginError: false,
         keepUserLogged: false,
         checkBox: false,
+        showError: false,
+        errorMessage: 'Invalid username or password'
     }
 
     componentWillMount(){
@@ -28,6 +31,7 @@ class LoginScreen extends React.Component {
           if (isLogged)
               this.props.history.push('/home');
         });
+        this.handleErrorShow();
     }
 
     validateIsLogged = async () => {
@@ -48,6 +52,15 @@ class LoginScreen extends React.Component {
         this.setState({checkBox : event.target.checked});
     }
 
+    handleErrorDismiss = () => {
+        console.log("CLIKSE")
+        this.setState({ showError: false });
+    }
+    handleErrorShow = () => {
+        console.log("CLIKSE")
+        this.setState({ showError: true });
+    }
+
     tryAuthorize = async e => {
         e.preventDefault();
         const { username, password } = this.state;
@@ -65,6 +78,7 @@ class LoginScreen extends React.Component {
         return (
             <div>
                 <Toolbar />
+                {this.state.showError ? <ErrorMessage onClick={this.handleErrorDismiss} errorMessage={this.state.errorMessage}></ErrorMessage> : ''}
                 <Container fluid={true} style={{ marginTop: '6em' }}>
                     <Row>
                         <Col lg={4} md={4}></Col>

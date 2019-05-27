@@ -9,8 +9,6 @@ function Toolbar() {
         <div>
             <img src={logo} className='Logo' alt="Logo" />
         </div>
-        <div style={{paddingTop: '1.3em', paddingRight: '17em'}}>
-        </div>
     </header>
   );
 }
