@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "61fdad2ee949db5919f49bde7400c6f2",
+    "revision": "e869ebd9528bf70154c1819864bb4405",
     "url": "/forestfox128/index.html"
   },
   {
-    "revision": "8e4e5cc4f04e2494722b",
+    "revision": "56dc6ab1cc900ed9e5e7",
     "url": "/forestfox128/static/css/main.40782470.chunk.css"
   },
   {
-    "revision": "c6f0845a2cc4c7e6e63c",
-    "url": "/forestfox128/static/js/2.9b7897d9.chunk.js"
+    "revision": "bf241edf3f3219a63aac",
+    "url": "/forestfox128/static/js/2.4c06e885.chunk.js"
   },
   {
-    "revision": "8e4e5cc4f04e2494722b",
-    "url": "/forestfox128/static/js/main.b1e4a8fc.chunk.js"
+    "revision": "56dc6ab1cc900ed9e5e7",
+    "url": "/forestfox128/static/js/main.9b304f93.chunk.js"
   },
   {
     "revision": "7b9a3f36708a46f079e0",
