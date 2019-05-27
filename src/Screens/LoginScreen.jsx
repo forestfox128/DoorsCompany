@@ -72,9 +72,9 @@ class LoginScreen extends React.Component {
     }
     tryAuthorize = async e => {
         e.preventDefault();
-        const { username, password } = this.state; 
+        const { email, password } = this.state; 
         setTimeout(this.showProgress(), 2000);
-        const token = await authorizeUser(username, password);
+        const token = await authorizeUser(email, password);
         
             this.setState({showProgressBar: false});
             if (token.status === 200) {

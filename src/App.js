@@ -24,6 +24,17 @@ const messages = {
   'en': messages_en
 };
 
+const renderContent = () => (
+  <>
+    
+    <PrivateRoute
+      path="/home"
+      component={HomeScreen}
+    />
+  </>
+);
+
+
 class App extends React.Component {
 
   state = {
@@ -31,7 +42,6 @@ class App extends React.Component {
   }
 
   handleSelectChange = (event) => {
-    console.log(event.target.value)
     this.setState({selectValue: event.target.value});
   }
 
@@ -42,8 +52,12 @@ class App extends React.Component {
     <Toolbar value={this.state.selectValue} onChange={this.handleSelectChange}/>
       <Router>
           <Switch>
-            <Route path="/login" component={LoginScreen}/>
-            <PrivateRoute path='/home' component={HomeScreen} />
+            <Route path="/" exact component={LoginScreen}/>
+            <PrivateRoute
+            path="/"
+            component={() => renderContent()}
+          />
+
         </Switch> 
       </Router> 
     </div>
