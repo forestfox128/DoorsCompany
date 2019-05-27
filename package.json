@@ -2,7 +2,6 @@
   "name": "doorscompany",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/forestfox128",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
@@ -11,14 +10,12 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-intl": "^2.9.0",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "3.0.1",
     "react-stepper-horizontal": "^1.0.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
