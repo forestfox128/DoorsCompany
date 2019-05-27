@@ -4,7 +4,7 @@ import './Checkbox.css';
 
 function Checkbox(props) {
     return (
-        <Form.Check type="checkbox" label={props.checkboxLabel} />
+        <Form.Check id="materialUnchecked" type="checkbox" label={props.checkboxLabel} />
     );
 }
 

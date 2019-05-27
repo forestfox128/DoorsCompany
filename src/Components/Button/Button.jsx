@@ -4,7 +4,7 @@ import './Button.css'
 
 function Buttons(props) {
     return (
-        <Button variant="flat" size="xxl" type={props.submit}>{props.buttonText}</Button>
+        <Button variant="flat" size="xxl" type={props.submit} onClick={props.onClick}>{props.buttonText}</Button>
     );
   }
 
