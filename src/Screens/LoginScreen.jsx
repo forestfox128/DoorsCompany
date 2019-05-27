@@ -18,7 +18,8 @@ class LoginScreen extends React.Component {
         email: '',
         password: '',
         loginError: false,
-        keepUserLogged: false
+        keepUserLogged: false,
+        checkBox: false,
     }
 
     componentWillMount(){
@@ -42,13 +43,18 @@ class LoginScreen extends React.Component {
     handleChangePassword = event => {
         this.setState({ password: event.target.value });
     }
+    handleChangeCheckbox = event => {
+        console.log(event.target.checked);
+        this.setState({checkBox : event.target.checked});
+    }
 
     tryAuthorize = async e => {
         e.preventDefault();
         const { username, password } = this.state;
         const token = await authorizeUser(username, password);
               if (token) {
-                  localStorage.setItem('isLogged', 'logged');
+                  if(this.state.checkBox)
+                    localStorage.setItem('isLogged', 'logged');
                   this.props.history.push('/home');
               } else {
                   this.setState({loginError: true})
@@ -73,7 +79,8 @@ class LoginScreen extends React.Component {
                                     <FormInput type={"password"} placeholder={"Password"} onChange={this.handleChangePassword} />
                                 </Form.Group>
                                 <Form.Group controlId="formBasicChecbox" >
-                                    <CheckBox checkboxLabel={"Keep me logged"}></CheckBox>
+                                    <CheckBox checkboxLabel={"Keep me logged"} checked={this.state.checkBox}
+                                    onChange={this.handleChangeCheckbox}></CheckBox>
                                 </Form.Group>
                                 <Button buttonText={"Zaloguj"} onClick={this.tryAuthorize}></Button>
                             </Form>
