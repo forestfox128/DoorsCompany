@@ -1,16 +1,16 @@
 import React from 'react';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container'
-import Toolbar from '../Components/Toolbar/Toolbar';
+import Container from 'react-bootstrap/Container';
 import Button from '../Components/Button/Button';
 import FormInput from '../Components/FormInput/FormInput';
 import CheckBox from '../Components/Checkbox/Checkbox';
 import Progressbar from '../Components/Progressbar/Progressbar';
 import ErrorMessage from '../Components/ErrorMessage/ErrorMessage';
 import {authorizeUser} from '../services/api';
-
+import { injectIntl } from 'react-intl';
 import '../styles/style.css';
 
 class LoginScreen extends React.Component {
@@ -24,7 +24,6 @@ class LoginScreen extends React.Component {
         errorMessage: '',
         showProgressBar: false,
         progressState: 0,
-        selectValue: 'polish'
     }
 
     componentWillMount(){
@@ -62,10 +61,6 @@ class LoginScreen extends React.Component {
         this.setState({ showError: true });
     }
 
-    handleSelectChange = (event) => {
-        console.log(event.target.value)
-        this.setState({selectValue: event.target.value});
-    }
 
     showProgress () {
         this.setState({showProgressBar: true});
@@ -96,9 +91,15 @@ class LoginScreen extends React.Component {
       }
 
     render() {
+        const { intl } = this.props;
+        const emailText = intl.formatMessage({ id: 'email.placeholder' });
+        const passwordText = intl.formatMessage({ id: 'password.placeholder' });
+        const loginText = intl.formatMessage({ id: 'login.text' });
+        const buttonLoginText = intl.formatMessage({ id: 'login.button.text' });
+        const checkBoxText = intl.formatMessage({ id: 'checkbox.text' });
         return (
             <div> 
-                <Toolbar value={this.state.selectValue} onChange={this.handleSelectChange}/>
+                
                 {this.state.showProgressBar ? <Progressbar progressState={this.state.progressState} /> : ''}
                 {this.state.showError ? <ErrorMessage onClick={this.handleErrorDismiss} errorMessage={this.state.errorMessage}></ErrorMessage> : ''}
                 <Container fluid={true} style={{ marginTop: '6em' }}>
@@ -106,19 +107,19 @@ class LoginScreen extends React.Component {
                         <Col lg={4} md={4}></Col>
                         <Col lg={4} md={4} style={{padding: '6em'}}>
                             <Form noValidate>
-                                <Form.Label className="form-label">Log in</Form.Label>
+                                <Form.Label className="form-label">{loginText}</Form.Label>
                                 <Form.Group controlId="formBasicEmail">
-                                    <FormInput type={"email"} placeholder={"Enter email"} onChange={this.handleChangeEmail} />
+                                    <FormInput type={"email"} placeholder={emailText} onChange={this.handleChangeEmail} />
                                 </Form.Group>
 
                                 <Form.Group controlId="formBasicPassword">
-                                    <FormInput type={"password"} placeholder={"Password"} onChange={this.handleChangePassword} />
+                                    <FormInput type={"password"} placeholder={passwordText} onChange={this.handleChangePassword} />
                                 </Form.Group>
                                 <Form.Group controlId="formBasicChecbox" >
-                                    <CheckBox checkboxLabel={"Keep me logged"} checked={this.state.checkBox}
+                                    <CheckBox checkboxLabel={checkBoxText} checked={this.state.checkBox}
                                     onChange={this.handleChangeCheckbox}></CheckBox>
                                 </Form.Group>
-                                <Button buttonText={"Zaloguj"} onClick={this.tryAuthorize} size={"xxl"}></Button>
+                                <Button buttonText={buttonLoginText} onClick={this.tryAuthorize} size={"xxl"}></Button>
                             </Form>
 
                         </Col>
@@ -131,4 +132,4 @@ class LoginScreen extends React.Component {
     }
 }
 
-export default LoginScreen;
+export default injectIntl(LoginScreen);

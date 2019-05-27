@@ -1,6 +1,5 @@
 import React from 'react';
 import Toolbar from '../Components/Toolbar/Toolbar';
-import {getOrganizationData} from '../services/api';
 class HomeScreen extends React.Component {
 
     state = {
@@ -14,7 +13,6 @@ class HomeScreen extends React.Component {
 
     showOrganizationDetails = async e => {
         console.log("SHOW DETARILS")
-        const token = await getOrganizationData();
     }
 
     render() {

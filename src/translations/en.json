@@ -1,0 +1,11 @@
+{
+    "select.language.title": "Select language",
+    "select.language.en": "English",
+    "select.language.pl": "Polish",
+
+    "email.placeholder": "Enter email",
+    "password.placeholder": "Enter password",
+    "login.text": "Log in",
+    "login.button.text": "Login",
+    "checkbox.text": "Keep me logged in"
+}
