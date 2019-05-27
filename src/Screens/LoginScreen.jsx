@@ -18,11 +18,12 @@ class LoginScreen extends React.Component {
     state = {
         email: '',
         password: '',
-        loginError: false,
         keepUserLogged: false,
         checkBox: false,
         showError: false,
-        errorMessage: 'Invalid username or password'
+        errorMessage: '',
+        showProgressBar: false,
+        progressState: 0
     }
 
     componentWillMount(){
@@ -31,7 +32,6 @@ class LoginScreen extends React.Component {
           if (isLogged)
               this.props.history.push('/home');
         });
-        this.handleErrorShow();
     }
 
     validateIsLogged = async () => {
@@ -53,11 +53,9 @@ class LoginScreen extends React.Component {
     }
 
     handleErrorDismiss = () => {
-        console.log("CLIKSE")
         this.setState({ showError: false });
     }
     handleErrorShow = () => {
-        console.log("CLIKSE")
         this.setState({ showError: true });
     }
 
@@ -65,19 +63,28 @@ class LoginScreen extends React.Component {
         e.preventDefault();
         const { username, password } = this.state;
         const token = await authorizeUser(username, password);
-              if (token) {
+        setTimeout(() => {
+            this.setState({showProgressBar: true});
+            console.log("Tiem")
+          }, 2000);
+          this.setState({showProgressBar: false});
+              if (token.status === 200) {
                   if(this.state.checkBox)
                     localStorage.setItem('isLogged', 'logged');
                   this.props.history.push('/home');
               } else {
-                  this.setState({loginError: true})
+                  if(token === 401)
+                    this.setState({showError: true , errorMessage: 'Invalid username or password'})
+                else this.setState({showError: true , errorMessage: 'A login error occured'})
               }   
       }
 
     render() {
         return (
             <div>
+                
                 <Toolbar />
+                {this.state.showProgressBar ? <Progressbar progressState={40} /> : ''}
                 {this.state.showError ? <ErrorMessage onClick={this.handleErrorDismiss} errorMessage={this.state.errorMessage}></ErrorMessage> : ''}
                 <Container fluid={true} style={{ marginTop: '6em' }}>
                     <Row>
@@ -103,7 +110,7 @@ class LoginScreen extends React.Component {
                         <Col lg={4} md={4}></Col>
                     </Row>
                 </Container>
-                <Progressbar />
+                
             </div>
         );
     }

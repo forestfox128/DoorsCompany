@@ -9,15 +9,6 @@
     box-sizing: border-box;
     z-index: 100;
 }
-
-.ErrorText {
-    font-size: 16px;
-    vertical-align: middle;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff;
-    margin-top: 30px;
-}
 .fade {
     height: 80px;
     width: 100%;

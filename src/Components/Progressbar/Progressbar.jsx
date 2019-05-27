@@ -5,7 +5,10 @@ import './Progressbar.css';
 
 function Progressbar(props) {
     return (
-        <ProgressBar now={60} label={`60%`} ></ProgressBar>
+        <div className='ProgressBarContainer'>
+        <div className="ProgressHeader">Processing ...</div>
+        <ProgressBar now={props.progressState} label={`60%`} ></ProgressBar>
+        </div>
     );
 }
 
