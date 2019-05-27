@@ -10,7 +10,6 @@ const instance = axios.create({
 
 instance.interceptors.response.use( undefined, (error) => {
  
-  console.log(error.response.status+"ERROR");
   if (error.response.status === 401){
     return error.response.status
    }
@@ -22,8 +21,8 @@ instance.interceptors.response.use( undefined, (error) => {
 
 export async function authorizeUser(username, password) {
   const data = {
-    "email": "login@applover.pl",
-    "password": "password123"
+    "email": username,//"login@applover.pl",
+    "password": password//"password123"
   }
     const token = await instance.post(`login/`, data);
     console.log(token);
