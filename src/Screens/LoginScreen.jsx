@@ -72,7 +72,11 @@ class LoginScreen extends React.Component {
     }
     tryAuthorize = async e => {
         e.preventDefault();
-        const { email, password } = this.state; 
+        const { email, password } = this.state;
+        if(email === '' || password === ''){
+            this.setState({showError: true , errorMessage: 'Username and password cannot be empty'})
+            return;
+        } 
         setTimeout(this.showProgress(), 2000);
         const token = await authorizeUser(email, password);
         
@@ -90,6 +94,14 @@ class LoginScreen extends React.Component {
             }          
       }
 
+      handleKeyDown = (e) => {
+
+        if (e.key === 'Enter') {
+          this.tryAuthorize(e);
+        }
+      }
+      
+
     render() {
         const { intl } = this.props;
         const emailText = intl.formatMessage({ id: 'email.placeholder' });
@@ -106,7 +118,7 @@ class LoginScreen extends React.Component {
                     <Row>
                         <Col lg={4} md={4}></Col>
                         <Col lg={4} md={4} style={{padding: '6em'}}>
-                            <Form noValidate>
+                            <Form noValidate onKeyDown={this.handleKeyDown} onSubmit={this.preventDefault}>
                                 <Form.Label className="form-label">{loginText}</Form.Label>
                                 <Form.Group controlId="formBasicEmail">
                                     <FormInput type={"email"} placeholder={emailText} onChange={this.handleChangeEmail} />
